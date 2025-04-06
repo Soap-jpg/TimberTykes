@@ -12,4 +12,4 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(expRoutes);
 app.use(main_page);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
