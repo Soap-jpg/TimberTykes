@@ -80,17 +80,17 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-left: 6px solid;
-    min-height: 300px; /* Equal height for all boxes */
+    min-height: 300px; 
     display: flex;
     flex-direction: column;
 }
 
-/* Left column boxes (Objective, Steps) */
+
 .content-box:nth-child(odd) {
     border-left-color: #42a5f5;
 }
 
-/* Right column boxes (Materials, Skills) */
+
 .content-box:nth-child(even) {
     border-left-color: #66bb6a;
 }
@@ -100,23 +100,23 @@ h2 {
     margin-top: 0;
     font-size: 1.5em;
     border-bottom: 3px dotted;
-    flex-shrink: 0; /* Prevent title from shrinking */
+    flex-shrink: 0; 
 }
 
-/* Left column titles */
+
 .content-box:nth-child(odd) h2 {
     border-bottom-color: #42a5f5;
     color: #1565c0;
 }
 
-/* Right column titles */
+
 .content-box:nth-child(even) h2 {
     border-bottom-color: #66bb6a;
     color: #2e7d32;
 }
 
 .box-content {
-    flex-grow: 1; /* Makes content fill remaining space */
+    flex-grow: 1; 
     display: flex;
     flex-direction: column;
 }
@@ -234,6 +234,6 @@ h2 {
     }
     
     .content-box {
-        min-height: auto; /* Remove fixed height on mobile */
+        min-height: auto;
     }
 }
