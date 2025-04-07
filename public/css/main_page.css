@@ -290,7 +290,7 @@ h2 {
     animation-play-state: paused;
 }
 
-/* Gradient fade effects on sides */
+
 .testimonials-container:before,
 .testimonials-container:after {
     content: '';
