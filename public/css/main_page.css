@@ -538,6 +538,265 @@ h2 {
     text-shadow: none;
 }
 
+/* ===== ECO IMPACT SECTION ===== */
+.eco-impact {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 3rem 0;
+  box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+  border: 3px solid #81c784;
+}
+
+.eco-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.eco-header h2 {
+  color: #2e7d32;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: none;
+}
+
+.subtitle {
+  color: #388e3c;
+  font-size: 1.1rem;
+}
+
+/* Gauge Meter */
+.gauge-container {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.gauge {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gauge-base {
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 10;
+}
+
+.gauge-fill {
+  fill: none;
+  stroke: #4caf50;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 339;
+  stroke-dashoffset: calc(339 - (339 * var(--percentage)) / 100);
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+.gauge-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.gauge-content span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1b5e20;
+  display: block;
+  line-height: 1;
+}
+
+.gauge-content small {
+  color: #388e3c;
+  font-size: 0.9rem;
+}
+
+/* Impact Details */
+.impact-details {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.detail-box {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  flex: 1;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.detail-box span {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2e7d32;
+  display: block;
+}
+
+.detail-box p {
+  margin: 0.5rem 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Forest Visualizer */
+/* Update these styles in your existing CSS */
+.forest-scene {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 100px;
+  padding: 1rem;
+  background: rgba(255,255,255,0.7);
+  border-radius: 15px;
+  /* Add these new properties */
+  transition: all 0.3s ease;
+  min-height: 150px; /* Increased minimum height */
+  max-height: 300px; /* Maximum height before scrolling */
+  overflow-y: auto; /* Add scroll if too many trees */
+  margin: 1.5rem 0;
+}
+
+/* Tree styling */
+.tree {
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  flex: 0 0 auto; /* Prevent trees from shrinking */
+  margin: 5px; /* Consistent spacing */
+}
+
+/* Make the container grow with content */
+.eco-visualizer {
+  min-height: 150px;
+  transition: min-height 0.3s ease;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #a5d6a7, #4caf50);
+  width: 0%;
+  transition: width 1s ease;
+}
+
+/* Action Buttons */
+.action-btn {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+
+/* Modal */
+.eco-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.eco-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+
+.eco-modal.active .modal-content {
+  transform: translateY(0);
+}
+
+.eco-facts li {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.close-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+/* Add this to your existing CSS */
+.eco-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+#purchase-toolbox, #learn-more {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+#purchase-toolbox span, #learn-more span {
+  font-size: 1.2rem;
+}
+
+/* Make sure the action buttons have proper spacing */
+.action-btn {
+  margin: 10px;
+}
+
+.eco-visualizer .progress-bar {
+  visibility: hidden; /* Hides it but keeps the space */
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .features-grid {
@@ -589,4 +848,24 @@ h2 {
     .testimonials-container:after {
         width: 50px;
     }
+
+    /* Add to existing media queries */
+@media (max-width: 768px) {
+  .eco-dashboard {
+    flex-direction: column;
+  }
+  
+  .impact-meter {
+    margin-bottom: 2rem;
+  }
+  
+  .eco-actions {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
 }

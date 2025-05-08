@@ -159,6 +159,68 @@
                 <li>Wash hands after sanding or working with wood</li>
             </ul>
         </section>
+
+    <!-- NEW: Eco Impact Section -->
+    <section class="eco-impact">
+        <div class="eco-header">
+            <h2>🌍 Our Woodworking Superpowers!</h2>
+            <p class="subtitle">Discover how we're helping the planet</p>
+        </div>
+
+        <div class="eco-dashboard">
+            <div class="impact-meter">
+                <div class="gauge-container">
+                    <svg class="gauge" viewBox="0 0 120 120">
+                        <circle class="gauge-base" cx="60" cy="60" r="54"></circle>
+                        <circle class="gauge-fill" cx="60" cy="60" r="54" style="--percentage:0"></circle>
+                    </svg>
+                    <div class="gauge-content">
+                        <span id="trees-saved">0</span>
+                        <small>Trees Saved</small>
+                    </div>
+                </div>
+                <div class="impact-details">
+                    <div class="detail-box">
+                        <span id="co2-reduced">0</span>
+                        <p>Kilograms of CO₂ Reduced</p>
+                    </div>
+                    <div class="detail-box">
+                        <span id="toolboxes-purchased">0</span>
+                        <p>Toolbox's Purchased</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eco-visualizer">
+                <div class="forest-scene"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="eco-actions">
+            <button class="action-btn" id="purchase-toolbox">
+                <span>➕</span> Purchase Toolbox
+            </button>
+            <button class="action-btn" id="learn-more">
+                <span>ℹ️</span> How This Helps
+            </button>
+        </div>
+
+        <div class="eco-modal" id="eco-modal">
+            <div class="modal-content">
+                <h3>Your Impact Matters!</h3>
+                <p>Every woodworking project makes a difference:</p>
+                <ul class="eco-facts">
+                    <li>📊 <strong>1 tree</strong> can absorb <strong>21.8 kg</strong> of CO₂ per year</li>
+                    <li>♻️ <strong>Recycled wood</strong> saves water and energy</li>
+                    <li>🛠️ <strong>Proper tool care</strong> reduces waste</li>
+                </ul>
+                <button class="close-btn">Got It!</button>
+            </div>
+        </div>
+    </section>
         
         <section id="experiments" class="experiments-section">
             <h2 style="text-align: center;">Featured Experiments</h2>
@@ -238,5 +300,150 @@
             <p>&copy; 2025 Timber Tykes. All rights reserved.</p>
         </section>
     </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Script loaded!"); // Check if this appears in console
+  
+  // Initialize counters
+  let toolboxesPurchased = 0;
+  let treesSaved = 0;
+  let co2ReducedKg = 0;
+  
+  // DOM elements
+  const treesElement = document.getElementById('trees-saved');
+  const co2Element = document.getElementById('co2-reduced');
+  const toolboxesElement = document.getElementById('toolboxes-purchased');
+  const gaugeFill = document.querySelector('.gauge-fill');
+  const progressFill = document.querySelector('.progress-fill');
+  const forestScene = document.querySelector('.forest-scene');
+  const purchaseToolboxBtn = document.getElementById('purchase-toolbox');
+  const learnMoreBtn = document.getElementById('learn-more');
+  const ecoModal = document.getElementById('eco-modal');
+  const closeModalBtn = document.querySelector('.close-btn');
+
+  // Debug: Check if elements exist
+  console.log("Elements found:", {
+    treesElement,
+    co2Element,
+    toolboxesElement,
+    gaugeFill,
+    progressFill,
+    forestScene,
+    purchaseToolboxBtn,
+    learnMoreBtn,
+    ecoModal,
+    closeModalBtn
+  });
+
+  // Calculate derived metrics
+  function calculateDerivedMetrics() {
+    treesSaved = 3 * toolboxesPurchased;
+    co2ReducedKg = Math.round(treesSaved * 21.8);
+  }
+  
+  // Animation function
+  function animateValue(element, start, end, duration, suffix = '') {
+    if (!element) {
+      console.error("Element not found for animation");
+      return;
+    }
+    
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const value = Math.floor(progress * (end - start) + start);
+      element.textContent = value + suffix;
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }
+  
+  // Update all metrics
+  function updateMetrics() {
+    calculateDerivedMetrics();
+    
+    animateValue(treesElement, 0, treesSaved, 1000);
+    animateValue(co2Element, 0, co2ReducedKg, 1000);
+    animateValue(toolboxesElement, 0, toolboxesPurchased, 1000);
+    
+    const percentage = Math.min((treesSaved / 30) * 100, 100);
+    if (gaugeFill) {
+      gaugeFill.style.setProperty('--percentage', percentage);
+    }
+    
+    if (progressFill) {
+      progressFill.style.width = `${percentage}%`;
+    }
+    
+    updateForest();
+  }
+  
+// Update forest visualization
+function updateForest() {
+    if (!forestScene) {
+        console.error("Forest scene element not found");
+        return;
+    }
+    
+    forestScene.innerHTML = '';
+    const treeCount = Math.min(treesSaved, 20);
+    
+    for (let i = 0; i < treeCount; i++) {
+        const tree = document.createElement('div');
+        tree.className = 'tree';
+        tree.textContent = '🌲';
+        forestScene.appendChild(tree);
+        
+        setTimeout(() => {
+            tree.style.opacity = '1';
+            tree.style.transform = 'translateY(0)';
+        }, i * 100);
+    }
+    
+    // Automatically adjust the box height based on tree count
+    if (treeCount <= 10) {
+        forestScene.style.minHeight = "150px"; // Default height
+    } else if (treeCount <= 15) {
+        forestScene.style.minHeight = "200px"; // Medium height
+    } else {
+        forestScene.style.minHeight = "250px"; // Tall height
+    }
+}
+  
+  // Event listeners with checks
+  if (purchaseToolboxBtn) {
+    purchaseToolboxBtn.addEventListener('click', function() {
+      toolboxesPurchased += 1;
+      updateMetrics();
+      
+      this.textContent = '🎉 Thank You! 🎉';
+      setTimeout(() => {
+        this.innerHTML = '<span>➕</span> Purchase Toolbox';
+      }, 2000);
+    });
+  }
+  
+  if (learnMoreBtn && ecoModal) {
+    learnMoreBtn.addEventListener('click', function() {
+      ecoModal.classList.add('active');
+    });
+  }
+  
+  if (closeModalBtn && ecoModal) {
+    closeModalBtn.addEventListener('click', function() {
+      ecoModal.classList.remove('active');
+    });
+  }
+  
+  // Initialize with some values
+  toolboxesPurchased = 2;
+  updateMetrics();
+});
+</script>
+
+    
 </body>
 </html>
